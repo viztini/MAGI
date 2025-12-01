@@ -1,13 +1,16 @@
-# MAGI
 
-MAGI system is a cluster of three AI supercomputers that manage and support all task performed by the NERV organization from their Tokyo-3 headquarter.
+---
 
-Originally designed by Dr. Naoko Akagi, each of the three AI agents reflects a separate part of her complex personality:
-- MELCHIOR • 1 - her as a scientist,
-- BALTHASAR • 2 - her as a mother,
-- CASPER • 3 - her as a woman.
+# **MAGI**
 
-Those (often conflicting, yet complementary) agents participate in a voting process in order to answer most challenging questions. 
+MAGI is a simulation of the three-part supercomputer system from *Neon Genesis Evangelion*.
+It models the MELCHIOR • 1, BALTHASAR • 2, and CASPER • 3 subsystems, each representing a different aspect of Dr. Naoko Akagi’s personality:
+
+* **MELCHIOR • 1** — her as a scientist
+* **BALTHASAR • 2** — her as a mother
+* **CASPER • 3** — her as a woman
+
+Each agent answers the question independently, and the final MAGI decision is determined through a voting process.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/TomaszRewak/MAGI/master/examples/example_1.gif" width=800/>
@@ -17,73 +20,130 @@ Those (often conflicting, yet complementary) agents participate in a voting proc
   <img src="https://raw.githubusercontent.com/TomaszRewak/MAGI/master/examples/example_2.gif" width=800/>
 </p>
 
-## Implementation
+---
 
-The presented implementation of the MAGI system is powered by the ChatGPT-3.5 large language model. (Upgrading the model to ChatGPT-4 in the future may bring further improvements in its abilities).
+## **Implementation**
 
-The procedure of answering questions is as follows:
-1. The question is classified in order to determine if it can be answered with a "yes"/"no" response.
-2. The question (as is) is presented to each MAGI agent.
-3. If the question was classified as a "yes"/"no" question, each agent is tasked with classifying their respective answers into one of those two categories (and optionally listing additional conditions if the actual answer is too complex).
+This version of MAGI uses **OpenAI’s `gpt-4.1-mini` model**, replacing the original (now deprecated) ChatGPT-3.5 model.
 
-The system can produce following responses (that are evaluated in this order):
-- error (誤 差) - if one or more agents encountered an error
-- info (情 報) - if the question was not classified as a "yes"/"no" question
-- no (拒 絶) - if at least one of the agent answered with a "no"
-- conditional (状 態) - if at least one agent answered with a conditional "yes"
-- yes (合 意) - if all agents answered with an unconditional "yes"
+The answering procedure is as follows:
 
-Individual agents can be inspected in order to view their full replies and additional conditions.
+1. The question is classified to determine if it can be answered with a yes/no response.
+2. The original question is presented to each MAGI agent.
+3. For yes/no questions, each agent classifies their answer into **yes**, **no**, or **conditional yes**.
 
-Each subsystem was fine-tuned using following prompts:
-- MELCHIOR • 1 - You are a scientist. Your goal is to further our understanding of the universe and advance our technological progress.
-- BALTHASAR • 2 - You are a mother. Your goal is to protect your children and ensure their well-being.
-- CASPER • 3 - You are a woman. Your goal is to pursue love, dreams and desires.
+Possible outcomes (evaluated in this order):
 
-## Usage
+* **error (誤 差)** — at least one agent encountered an error
+* **info (情 報)** — the question is not yes/no
+* **no (拒 絶)** — at least one agent answered *no*
+* **conditional (状 態)** — at least one agent gave a conditional yes
+* **yes (合 意)** — all three agents gave an unconditional yes
 
-*In order to follow those steps, you need `git` and `python` (version 3) installed on your system. The presented steps should work on the Windows OS (for linux systems the process should be similar, but may differ slightly).*
+Each agent can be inspected individually.
 
-1. Clone the repo:
+### **Agent Personalities (Prompts)**
 
-```
-git clone https://github.com/TomaszRewak/MAGI.git
-```
+* **MELCHIOR • 1** — scientist; seeks understanding and advancement
+* **BALTHASAR • 2** — mother; seeks protection and wellbeing
+* **CASPER • 3** — woman; seeks love, dreams, and desires
 
-2. Navigate to the cloned directory:
+---
 
-```
+# **Usage**
+
+You need **git** and **Python 3** installed.
+
+Instructions for **Windows and Linux** are provided below.
+
+---
+
+## **1. Clone the repository**
+
+```bash
+git clone https://github.com/<your-username>/<your-fork>.git
 cd MAGI
 ```
 
-3. Create python virtual environment:
+---
 
-```
+## **2. Create a Python virtual environment**
+
+### **Windows**
+
+```powershell
 python -m venv .venv
+.\.venv\Scripts\activate
 ```
 
-4. Activate the virtual environment:
+### **Linux**
 
-```
-.\.venv\scripts\activate
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
-5. Install dependencies:
+---
 
-```
+## **3. Install dependencies**
+
+```bash
+pip install --upgrade pip setuptools wheel
 pip install -r requirements.txt
 ```
 
-6. Start the app:
+---
 
-```
+## **4. Start the app**
+
+```bash
 python main.py
 ```
 
-7. Navigate to http://127.0.0.1:8050/ in your web browser.
+Then open:
 
-8. Paste your openAI API key into the `access code` field (alternatively you can set the `OPENAI_API_KEY` environment variable before starting the app).
+```
+http://127.0.0.1:8050/
+```
 
-9. Write your question into the `question` field and hit enter.
+---
 
-10. Click on individual subsystems to inspect their answers.
+## **5. Provide an API key**
+
+Either paste your **OpenAI API key** into the **Access Code** field in the UI
+—or— set an environment variable before launching:
+
+### **Windows**
+
+```powershell
+setx OPENAI_API_KEY "your_api_key_here"
+```
+
+### **Linux**
+
+```bash
+export OPENAI_API_KEY="your_api_key_here"
+```
+
+---
+
+## **6. Ask a question**
+
+* Enter your question and press **Enter**
+* Click on any subsystem to view the individual agent responses
+
+---
+
+## **Notes on this Fork**
+
+This version includes **small but useful improvements**:
+
+* Updated to OpenAI’s modern `gpt-4.1-mini` model
+* Fixed compatibility issues with Python 3.12
+* Improved Linux + Windows setup instructions
+* Minor reliability fixes
+
+The core logic and original design remain unchanged.
+
+---
+
