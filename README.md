@@ -13,11 +13,11 @@ It models the MELCHIOR • 1, BALTHASAR • 2, and CASPER • 3 subsystems, each
 Each agent answers the question independently, and the final MAGI decision is determined through a voting process.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/TomaszRewak/MAGI/master/examples/example_1.gif" width=800/>
+  <img src="https://raw.githubusercontent.com/viztini/MAGI/master/examples/example_1.gif" width=800/>
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/TomaszRewak/MAGI/master/examples/example_2.gif" width=800/>
+  <img src="https://raw.githubusercontent.com/viztini/MAGI/master/examples/example_2.gif" width=800/>
 </p>
 
 ---
@@ -61,7 +61,7 @@ Instructions for **Windows and Linux** are provided below.
 ## **1. Clone the repository**
 
 ```bash
-git clone https://github.com/<your-username>/<your-fork>.git
+git clone https://github.com/viztini/MAGI.git
 cd MAGI
 ```
 
